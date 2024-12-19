@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Structure and Basic Server Interaction</title>
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="container">
+        <h1>Enter your Details</h1>
+        <form action="/submit" method="POST">
+            <div class="grp">
+                <label for="username">Enter your Name:</label>
+                <input type="text" placeholder="Email Full Name" name="username">
+            </div>
+            <div class="grp">
+                <label for="email">Enter your email:</label>
+                <input type="email" name="email" placeholder="Enter Email" id="email">
+            </div>
+            <input id="submit" type="submit" value="Submit">
+        </form>
+    </div>
+</body>
+
+</html>
