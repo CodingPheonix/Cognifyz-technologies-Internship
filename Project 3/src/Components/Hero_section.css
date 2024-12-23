@@ -1,0 +1,43 @@
+@keyframes I_animation {
+    from{
+        opacity: 0;
+    }
+    to{
+        opacity: 1;
+    }
+}
+
+@keyframes Text_animation{
+    from{
+        opacity: 0;
+        transform: translateX(-10rem);
+    }
+    to{
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+
+#hero_image{
+    animation-name: I_animation;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+}
+
+#hero_text_1{
+    animation-name: Text_animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+}
+#hero_text_2{
+    animation-name: Text_animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: .4s;
+}
+#hero_text_3{
+    animation-name: Text_animation;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
+    animation-delay: .8s;
+}
