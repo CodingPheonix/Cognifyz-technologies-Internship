@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Form</title>
+  <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1>Registration Form</h1>
+    <form id="registrationForm">
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username">
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email">
+
+      <label for="password">Password:</label>
+      <input type="password" id="password" name="password">
+
+      <label for="gender">Gender:</label>
+      <select id="gender" name="gender">
+        <option disabled value="">Select Gender</option>
+        <option value="male">Male</option>
+        <option value="female">Female</option>
+        <option value="other">Other</option>
+      </select>
+
+      <div class="grp">
+        <input type="checkbox" id="terms" name="terms">
+        <label for="terms">I agree to the terms and conditions</label><br>
+      </div>
+
+      <button type="submit">Register</button>
+    </form>
+    <div id="formMessage" class="error"></div>
+  </div>
+
+
+  <script>
+    document.getElementById('registrationForm').addEventListener('submit', async function (event) {
+      event.preventDefault(); // Prevent default form submission
+  
+      const username = document.getElementById('username').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const password = document.getElementById('password').value.trim();
+      const gender = document.getElementById('gender').value;
+      const terms = document.getElementById('terms').checked;
+  
+      const errorMessage = document.getElementById('formMessage');
+      errorMessage.textContent = ''; // Clear any previous error messages
+  
+      // Validate the inputs
+      if (!username) {
+        errorMessage.textContent = 'Username is required.';
+        return;
+      }
+      if (!email) {
+        errorMessage.textContent = 'Email is required.';
+        return;
+      }
+      if (!password) {
+        errorMessage.textContent = 'Password is required.';
+        return;
+      }
+      if (!terms) {
+        errorMessage.textContent = 'You must accept the terms and conditions.';
+        return;
+      }
+  
+      // Prepare data to send
+      const data = { username, email, password, gender, terms };
+  
+      try {
+        // Send data to the server
+        const response = await fetch('/submit', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        });
+  
+        // Parse the JSON response
+        const result = await response.json();
+  
+        if (response.ok) {
+          // Handle success response
+          errorMessage.style.color = 'green';
+          errorMessage.textContent = result.message || 'Form submitted successfully!';
+        } else {
+          // Handle error response
+          errorMessage.style.color = 'red';
+          errorMessage.textContent = result.errors.join(', ') || 'An error occurred.';
+        }
+      } catch (err) {
+        // Handle network or other unexpected errors
+        errorMessage.style.color = 'red';
+        errorMessage.textContent = 'Something went wrong. Please try again later.';
+        console.error(err);
+      }
+    });
+  </script>
+  
+
+</body>
+
+</html>
